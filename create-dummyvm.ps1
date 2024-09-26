@@ -1,3 +1,19 @@
+# PowerCLI script to Create Dummay Virtual Machine (Without Operating System) for Scale
+# =====================================================================================
+#
+# Objective:
+#            Loading the vCenter inventory with the number of Virtual Machines
+#
+#  Mandatory Inputs needed for the script are vC Sever FDQN, vC Server Username, vC Password, VDS Portgroup Name, Datastore Name
+#  Resourcepool Name, Template, OS customization spec, and Number of Virtual Machines to be created
+#
+# Pre-req
+# VM Template & VM CustmomizatioSpec should be created upfront
+# Other Parameters have it handy
+#
+# Author: Shanthakumar K
+
+#Start of script.
 #Start of script.
 
 Param (
