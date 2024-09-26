@@ -1,3 +1,9 @@
+# PowerCLI script to Create Port Group in Scale
+# =============================================
+#  Mandatory Inputs needed for the script are vC Sever FDQN, vC Server Username, vC Password, VDS Portgroup Name, VDS Name, VLAN ID, and Number of Portgroups to be created
+#
+# Author: Shanthakumar K
+
 #Start of script.
 
 Param (
@@ -22,7 +28,7 @@ $number_pg | foreach {
 Write-Host "Get-VDSwitch -Name $vdsname | New-VDPortgroup -Name $portgroupname$_ -VlanId $vlan -RunAsync:$true" 
 Get-VDSwitch -Name $vdsname | New-VDPortgroup -Name $portgroupname$_ -VlanId $vlan -RunAsync:$true
 
-Write-Host "`nPortgroups created. Now confirming settings" -ForegroundColor Cyan
+Write-Host "Portgroups created. Now confirming settings" -ForegroundColor Cyan
 Get-VDSwitch $vdsname | Get-VDPortgroup | select name, numports, portbinding, vlanconfiguration
 
 }
