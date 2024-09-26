@@ -1,3 +1,16 @@
+# PowerCLI script to Create Virtual Machine using Template or Content Library in Scale
+# ====================================================================================
+#
+#  Mandatory Inputs needed for the script are vC Sever FDQN, vC Server Username, vC Password, VDS Portgroup Name, Datastore Name
+#  Resourcepool Name, Template, OS customization spec, and Number of Virtual Machines to be created
+#
+# Pre-req
+# VM Template & VM CustmomizatioSpec should be created upfront
+# Other Parameters have it handy
+#
+# Author: Shanthakumar K
+
+
 #Start of script.
 
 Param (
@@ -9,9 +22,9 @@ Param (
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Portgroup Name')] [ValidateNotNullOrEmpty()] [String]$portgroupname,
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Datastore Name')] [ValidateNotNullOrEmpty()] [String]$datastorename,
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Resource Pools Name')] [ValidateNotNullOrEmpty()] [String]$resourcepoolname,
-    [Parameter (Mandatory = $true, HelpMessage = 'Provide Number of Virtual Machines to be created')] [ValidateNotNullOrEmpty()] [String]$numberofVMs
-    [Parameter (Mandatory = $true, HelpMessage = 'Provide Template Name')] [ValidateNotNullOrEmpty()] [String]$vmtemplate
-    [Parameter (Mandatory = $true, HelpMessage = 'Provider OS Customization Spec Name')] [ValidateNotNullOrEmpty()] [String]$customizationspec
+    [Parameter (Mandatory = $true, HelpMessage = 'Provide Template Name')] [ValidateNotNullOrEmpty()] [String]$vmtemplate,
+    [Parameter (Mandatory = $true, HelpMessage = 'Provider OS Customization Spec Name')] [ValidateNotNullOrEmpty()] [String]$customizationspec,
+       [Parameter (Mandatory = $true, HelpMessage = 'Provide Number of Virtual Machines to be created')] [ValidateNotNullOrEmpty()] [String]$numberofVMs
 )
 
 Write-Host "Connecting to vCenter Server"
