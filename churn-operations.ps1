@@ -1,4 +1,28 @@
-#Start of script.
+# PowerCLI script to do Churn Operations on vCenter with Various Operations
+# ====================================================================================
+#
+#  Mandatory Inputs needed for the script are vC Sever FDQN, vC Server Username, vC Password, VDS Portgroup Name, Datastore Name
+#  Resourcepool Name, Template, customization spec, and Number of Virtual Machines to be created
+#
+# Pre-req
+# VM Template & VM CustmomizatioSpec should be created upfront
+# Other Parameters have it handy
+#
+# Churn Operations
+# ----Create VDS Portgroup
+# ----Create VM with PG
+# ----Power on the VM
+# ----Snapshot VM
+# ----Revert to Snapshot
+# ----Delete the Snapshot
+# ----Power cycle VM
+# ----Delete VM
+# ----Delete Portgroup
+#
+#
+# Based on the user input all the above operations will be performed "N" number of times
+#
+# Author: Shanthakumar K
 
 Param (
     # Required parameters for the script.
@@ -62,7 +86,7 @@ Write-Host "Delete VM"
 Write-Host "remove-vm $vmnameprefix$_ -Confirm:$false"
 remove-vm $vmnameprefix$_ -Confirm:$false
 
-Write-Host "Create New Portgroup"
+Write-Host "Delete New Portgroup"
 Write-Host "Get-VDPortGroup -Name $portgroupname$_ | Remove-VDPortGroup -RunAsync:$true" 
 Get-VDPortGroup -Name $portgroupname$_ | Remove-VDPortGroup -RunAsync:$true -Confirm:$false
 
