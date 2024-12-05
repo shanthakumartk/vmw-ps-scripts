@@ -22,7 +22,7 @@ Param (
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Portgroup Name')] [ValidateNotNullOrEmpty()] [String]$portgroupname,
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Datastore Name')] [ValidateNotNullOrEmpty()] [String]$datastorename,
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Cluster Name')] [ValidateNotNullOrEmpty()] [String]$clustername,
-    [Parameter (Mandatory = $true, HelpMessage = 'Provide Content Library Template Name')] [ValidateNotNullOrEmpty()] [String]$vmtemplate,
+    [Parameter (Mandatory = $true, HelpMessage = 'Provide Content Library Template Name')] [ValidateNotNullOrEmpty()] [String]$contentLibraryItem,
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Number of Virtual Machines to be created')] [ValidateNotNullOrEmpty()] [String]$numberofVMs
 )
 
@@ -41,8 +41,8 @@ if (!$ExResourcePool) {
 $numberofVM=1..$numberofVMs
 $numberofVM | foreach {
 
-Write-Host "New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $ExResourcePool -ContentLibraryItem $vmtemplate"
-New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $ExResourcePool -ContentLibraryItem $vmtemplate
+Write-Host "New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $ExResourcePool -ContentLibraryItem $contentLibraryItem"
+New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $ExResourcePool -ContentLibraryItem $contentLibraryItem
 
 Get-VM $vmname-$_ | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $portgroupname -Confirm:$false
 
@@ -52,3 +52,7 @@ Start-VM $vmname-$_
 }
 
 #End of script.
+
+# How to execute the script
+#  .\create-vm.ps1 -vc_fqdn 10.0.0.6 -vc_username Administrator@vsphere.local -vc_password VMware123!VMware123! 
+#       -vmname test01 -portgroupname SDDC-DPortGroup-VSAN -datastorename sfo01-m01-vsan -clustername SDDC-Cluster1  -contentLibraryItem ubuntu-scale -numberofVMs 5
