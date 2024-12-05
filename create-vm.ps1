@@ -24,7 +24,7 @@ Param (
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Resource Pools Name')] [ValidateNotNullOrEmpty()] [String]$resourcepoolname,
     [Parameter (Mandatory = $true, HelpMessage = 'Provide Template Name')] [ValidateNotNullOrEmpty()] [String]$vmtemplate,
     [Parameter (Mandatory = $true, HelpMessage = 'Provider OS Customization Spec Name')] [ValidateNotNullOrEmpty()] [String]$customizationspec,
-       [Parameter (Mandatory = $true, HelpMessage = 'Provide Number of Virtual Machines to be created')] [ValidateNotNullOrEmpty()] [String]$numberofVMs
+    [Parameter (Mandatory = $true, HelpMessage = 'Provide Number of Virtual Machines to be created')] [ValidateNotNullOrEmpty()] [String]$numberofVMs
 )
 
 Write-Host "Connecting to vCenter Server"
