@@ -2,7 +2,7 @@
 # ================================================================================
 #
 #  Mandatory Inputs needed for the script are vC Sever FDQN, vC Server Username, 
-#  vC Password, Datastore Name , Content LibraryName , OVA Name and OVA Path
+#  vC Password, Datastore Name, Content LibraryName, OVA Name and OVA Path
 #
 # Pre-req
 # OVA Template ( Only OVA is supported)
@@ -22,7 +22,7 @@ Param (
     [Parameter (Mandatory = $true, HelpMessage = 'Provide OVA Prefix')] [ValidateNotNullOrEmpty()] [String]$ovaPrefix
 )
 
-# Ignore unsigned ssl certificates and increase the http timeout value
+# Ignore unsigned SSL certificates and increase the HTTP timeout value
 Set-PowerCLIConfiguration -InvalidCertificateAction Ignore -Confirm:$false
 Set-PowerCLIConfiguration -WebOperationTimeoutSeconds 3600 -Scope Session
 
@@ -30,18 +30,18 @@ Write-Host "Connecting to vCenter Server"
 Write-Host "connect-viserver -Server $vc_fqdn -User $vc_username -Password $vc_password"
 connect-viserver -Server $vc_fqdn -User $vc_username -Password $vc_password
 
-Write-Host "Check the availablity of datastore and content library"
+Write-Host "Check the availability of the datastore and content library"
 $ExLibraryName = Get-ContentLibrary -Name $LibraryName
 $ExDatastore = Get-Datastore -Name $DatastoreName
 
-Write-Host "Check the availablity of datastore and content library"
+Write-Host "Check the availability of the datastore and content library"
 if (!$ExLibraryName -and $ExDatastore) {
     Write-Host "Creating New Content Library -- $LibraryName on $Datastore"
     New-ContentLibrary -Datastore $DatastoreName -Name $LibraryName
 
 }
 
-Write-Host "Check the availablity of OVA Template"
+Write-Host "Check the availability of OVA Template"
 $OVAlist = ls $($ovaPath)$ovaPrefix*.ova | Get-ChildItem -rec | ForEach-Object -Process {$_.BaseName}
 Write-Host "OVA Template --->" $OVAlist
 
