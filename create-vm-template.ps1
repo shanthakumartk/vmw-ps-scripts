@@ -1,5 +1,5 @@
-# PowerCLI script to Create Virtual Machine using Template or Content Library in Scale
-# ====================================================================================
+# PowerCLI script to Create Virtual Machine using Template in Scale
+# ==================================================================
 #
 #  Mandatory Inputs needed for the script are vC Sever FDQN, vC Server Username, vC Password, VDS Portgroup Name, Datastore Name
 #  Resourcepool Name, Template, OS customization spec, and Number of Virtual Machines to be created
