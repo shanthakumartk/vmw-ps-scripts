@@ -31,13 +31,20 @@ Write-Host "connect-viserver -Server $vc_fqdn -User $vc_username -Password $vc_p
 connect-viserver -Server $vc_fqdn -User $vc_username -Password $vc_password
 
 Write-Host "Create Resource Pool under Cluster"
-$resourcepoolname = New-ResourcePool -Name Workload-VM -Location $clustername
+$ExResourcePool = Get-ResourcePool -Location $clustername -Name Workload-VM-RPool
+
+if (!$ExResourcePool) {
+    Write-Host "Creating New Resource Pool"
+    $ExResourcePool = New-ResourcePool -Name Workload-VM-RPool -Location $clustername
+}
 
 $numberofVM=1..$numberofVMs
 $numberofVM | foreach {
 
-Write-Host "New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $resourcepoolname -Template $vmtemplate -OSCustomizationspec $customizationspec"
-New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $resourcepoolname --ContentLibraryItem $vmtemplate -NetworkName $portgroupname
+Write-Host "New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $ExResourcePool -ContentLibraryItem $vmtemplate"
+New-VM -Name $vmname-$_ -Datastore $datastorename -ResourcePool $ExResourcePool -ContentLibraryItem $vmtemplate
+
+Get-VM $vmname-$_ | Get-NetworkAdapter | Set-NetworkAdapter -NetworkName $portgroupname -Confirm:$false
 
 Write-Host "Start-VM $vmname-$_"
 Start-VM $vmname-$_
