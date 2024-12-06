@@ -61,3 +61,6 @@ foreach( $ova in $OVAlist){
 }
 
 #End of script.
+
+# How to execute the script
+# .\create-content-library.ps1 -vc_fqdn 10.0.0.6 -vc_username Administrator@vsphere.local -vc_password VMware123!VMware123! -LibraryName workload-template -DatastoreName sfo01-m01-vsan -ovaPath "C:\Users\Administrator\Downloads\" -ovaPrefix ubuntu
